@@ -8,21 +8,23 @@ import (
 )
 
 var (
-	size int
-	//isNumbersInUsage bool
-	//isSymbolsInUsage bool
+	size             int
+	isNumbersInUsage bool
 )
 
 var PasswordCommand = &cobra.Command{
 	Use:   "pass",
 	Short: "Generate password",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(tools.GetPassword(size))
+		var password, err = tools.GetPassword(size, isNumbersInUsage)
+		if err != nil {
+			fmt.Println("Something went wrong...")
+		}
+		fmt.Println(password)
 	},
 }
 
 func init() {
 	PasswordCommand.Flags().IntVarP(&size, "size", "s", 32, "Password length")
-	//PasswordCommand.Flags().BoolVar(&isNumbersInUsage, "num", false, "Are numbers should used")
-	//PasswordCommand.Flags().BoolVar(&isSymbolsInUsage, "symbol", false, "Are symbols should used")
+	PasswordCommand.Flags().BoolVar(&isNumbersInUsage, "num", false, "Are numbers should used")
 }
