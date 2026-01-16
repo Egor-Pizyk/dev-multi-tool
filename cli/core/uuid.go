@@ -1,6 +1,7 @@
 package core
 
 import (
+	"dev-multi-tool/common"
 	"dev-multi-tool/tools"
 	"fmt"
 
@@ -14,8 +15,8 @@ var UUIDCommand = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		var uuid = tools.GetUUID()
 		err := clipboard.WriteAll(uuid.String())
-		if err == nil {
-			fmt.Println("Already in clipboard.")
+		if err != nil {
+			fmt.Println(common.ErrorsEnum[common.SomethingWrong])
 		}
 		fmt.Println(uuid)
 	},

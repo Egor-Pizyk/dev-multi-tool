@@ -1,6 +1,7 @@
 package core
 
 import (
+	"dev-multi-tool/common"
 	"dev-multi-tool/tools"
 	"fmt"
 
@@ -18,7 +19,7 @@ var PasswordCommand = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		var password, err = tools.GetPassword(size, isNumbersInUsage)
 		if err != nil {
-			fmt.Println("Something went wrong...")
+			fmt.Println(common.ErrorsEnum[common.SomethingWrong])
 		}
 		fmt.Println(password)
 	},
