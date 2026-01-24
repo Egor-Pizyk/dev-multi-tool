@@ -5,6 +5,7 @@ import (
 	"dev-multi-tool/tools"
 	"fmt"
 
+	"github.com/atotto/clipboard"
 	"github.com/spf13/cobra"
 )
 
@@ -20,6 +21,10 @@ var PasswordCommand = &cobra.Command{
 		var password, err = tools.GetPassword(size, isNumbersInUsage)
 		if err != nil {
 			fmt.Println(common.ErrorsEnum[common.SomethingWrong])
+		}
+		if err := clipboard.WriteAll(password); err != nil {
+			fmt.Println(common.ErrorsEnum[common.SomethingWrong])
+			return
 		}
 		fmt.Println(password)
 	},
